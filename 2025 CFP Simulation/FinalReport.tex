@@ -1,0 +1,1395 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Project2},
+  pdfauthor={Jonathan Dietrich, Conner Toryfter, Karan Kapur},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Project2}
+\author{Jonathan Dietrich, Conner Toryfter, Karan Kapur}
+\date{2025-11-07}
+
+\begin{document}
+\maketitle
+
+\section{Simulating the College Football Playoff with a Bradley--Terry
+Model}\label{simulating-the-college-football-playoff-with-a-bradleyterry-model}
+
+\subsection{Executive Summary}\label{executive-summary}
+
+The 2025 College Football Playoff (CFP) introduces a 12-team format that
+significantly expands access to the national championship race. With
+four first-round byes and campus-site games for seeds 5--8, fans and
+analysts are eager to know how the bracket might unfold if the playoff
+began today.
+
+Our objective was to estimate each team's probability of advancing
+through each stage of the playoffs, given the committee's November 4 CFP
+rankings. To accomplish this, we combined four prominent team-strength
+metrics: ESPN FPI, SP+, SRS, and Elo into a single composite rating and
+applied a Bradley-Terry model to convert differences in ratings into win
+probabilities.
+
+Each team's composite score was standardized and scaled so that one
+standard deviation corresponded to a 65\% win probability on a neutral
+field. The tournament was simulated 500 times, without reseeding, to
+capture the inherent randomness of single-elimination play. We captured
+the results of each simulation at all four levels of the tournament. The
+simulation predicts that the highest seeds dominate the championship
+landscape. Ohio State (\#1) emerged as champion in roughly 26.8 \% of
+simulations, followed closely by Indiana (\#2) at 24.2 \%, Alabama (\#4)
+at 11.2 \%, and Texas A\&M (\#3) at 10.8 \%. Collectively, those four
+teams accounted for more than two-thirds of all titles. Mid-seeds such
+as Georgia and Ole Miss had single-digit title odds, while lower seeds
+like Memphis and Virginia rarely advanced beyond the first round. An
+interesting thing to note is that Oregon (\#9) ended up with the fifth
+best title odds at 7.4\%.
+
+These results highlight the tension between rating-based expectations
+and tournament variability. Even dominant programs fail to win nearly
+four times out of five. For fans, such forecasts translate rankings into
+tangible odds and underscore how often the playoff champion will depend
+on small-sample variance rather than deterministic superiority.
+
+\subsection{Introduction}\label{introduction}
+
+We use a simple Bradley--Terry (BT) model to convert composite team
+ratings into win probabilities and simulate the 12-team CFP bracket.
+Ratings come from FPI, SP+, Elo, and SRS (z-scored and averaged). The BT
+probability for team \emph{i} vs \emph{j} is
+\(p_{i,j} = \sigma(\beta_i - \beta_j), \quad \sigma(x) = \frac{1}{1+e^{-x}}\)
+We show results for 2025 and a 2024 back-test for comparison.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Sys.setenv}\NormalTok{(}\AttributeTok{CFBD\_API\_KEY =} \StringTok{"ITEs7pbYz8z66o4ksvNMW2m31B2ZPCnC+dbIXj2tT1mjMmJx02Dd9MM0fZpNhAyO"}\NormalTok{)}
+
+\FunctionTok{library}\NormalTok{(cfbfastR)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\subsection{Data Cleaning}\label{data-cleaning}
+
+We start by adding in the 12 teams that would be in the College Football
+Playoffs if they started today and then pulling metrics for each team
+from the cfbfastR package. We used the metrics FPI, SP+, Elo, and SRS
+because they are strong predictors of team strength. We z-scored and
+averaged these to make a composite score which is then what we used as
+our lambdas for the Bradley-Terry model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{teams }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Ohio State"}\NormalTok{, }\StringTok{"Indiana"}\NormalTok{, }\StringTok{"Texas A\&M"}\NormalTok{, }\StringTok{"Alabama"}\NormalTok{, }\StringTok{"Georgia"}\NormalTok{, }\StringTok{"Ole Miss"}\NormalTok{, }\StringTok{"BYU"}\NormalTok{, }\StringTok{"Texas Tech"}\NormalTok{, }\StringTok{"Oregon"}\NormalTok{, }\StringTok{"Notre Dame"}\NormalTok{, }\StringTok{"Virginia"}\NormalTok{, }\StringTok{"Memphis"}\NormalTok{)}
+
+
+\NormalTok{fpi }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_fpi}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, fpi)}
+\NormalTok{sp  }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_sp}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{)  }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, }\AttributeTok{sp =}\NormalTok{ rating) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(team }\SpecialCharTok{!=} \StringTok{"nationalAverages"}\NormalTok{)}
+\NormalTok{elo }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_elo}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, elo)}
+\NormalTok{srs }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_srs}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, }\AttributeTok{srs =}\NormalTok{ rating)}
+
+\NormalTok{z\_scores }\OtherTok{\textless{}{-}}\NormalTok{ fpi }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(sp,  }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(elo, }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(srs, }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ tidyr}\SpecialCharTok{::}\FunctionTok{drop\_na}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{z\_fpi =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(fpi)),}
+    \AttributeTok{z\_sp  =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(sp)),}
+    \AttributeTok{z\_elo =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(elo)),}
+    \AttributeTok{z\_srs =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(srs)),}
+    \AttributeTok{composite =}\NormalTok{ (z\_fpi }\SpecialCharTok{+}\NormalTok{ z\_sp }\SpecialCharTok{+}\NormalTok{ z\_elo }\SpecialCharTok{+}\NormalTok{ z\_srs)}\SpecialCharTok{/}\DecValTok{4}
+\NormalTok{  )}
+
+\NormalTok{ratings\_com }\OtherTok{=} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in}\NormalTok{ teams) \{}
+\NormalTok{  rating }\OtherTok{=}\NormalTok{ (z\_scores }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(team }\SpecialCharTok{==}\NormalTok{ t))}\SpecialCharTok{$}\NormalTok{composite[}\DecValTok{1}\NormalTok{]}
+  \FunctionTok{cat}\NormalTok{(t, }\StringTok{": "}\NormalTok{, rating, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\NormalTok{  ratings\_com }\OtherTok{=} \FunctionTok{c}\NormalTok{(ratings\_com, rating)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Ohio State: 2.325806
+## Indiana: 2.324875
+## Texas A&M: 1.607077
+## Alabama: 1.657976
+## Georgia: 1.621414
+## Ole Miss: 1.487946
+## BYU: 1.280167
+## Texas Tech: 1.700043
+## Oregon: 1.968132
+## Notre Dame: 1.935658
+## Virginia: 0.5962518
+## Memphis: 0.7123528
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probs\_com }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1} \SpecialCharTok{*} \FunctionTok{outer}\NormalTok{(}\AttributeTok{X =}\NormalTok{ ratings\_com, }\AttributeTok{Y =}\NormalTok{ ratings\_com, }\AttributeTok{FUN =} \StringTok{"{-}"}\NormalTok{)))}
+\FunctionTok{diag}\NormalTok{(probs\_com) }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\FunctionTok{round}\NormalTok{(probs\_com, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12]
+##  [1,]    NA 0.500 0.672 0.661 0.669 0.698 0.740 0.652 0.588 0.596 0.849 0.834
+##  [2,] 0.500    NA 0.672 0.661 0.669 0.698 0.740 0.651 0.588 0.596 0.849 0.834
+##  [3,] 0.328 0.328    NA 0.487 0.496 0.530 0.581 0.477 0.411 0.419 0.733 0.710
+##  [4,] 0.339 0.339 0.513    NA 0.509 0.542 0.593 0.489 0.423 0.431 0.743 0.720
+##  [5,] 0.331 0.331 0.504 0.491    NA 0.533 0.584 0.480 0.414 0.422 0.736 0.713
+##  [6,] 0.302 0.302 0.470 0.458 0.467    NA 0.552 0.447 0.382 0.390 0.709 0.685
+##  [7,] 0.260 0.260 0.419 0.407 0.416 0.448    NA 0.397 0.334 0.342 0.665 0.638
+##  [8,] 0.348 0.349 0.523 0.511 0.520 0.553 0.603    NA 0.433 0.441 0.751 0.729
+##  [9,] 0.412 0.412 0.589 0.577 0.586 0.618 0.666 0.567    NA 0.508 0.798 0.778
+## [10,] 0.404 0.404 0.581 0.569 0.578 0.610 0.658 0.559 0.492    NA 0.792 0.773
+## [11,] 0.151 0.151 0.267 0.257 0.264 0.291 0.335 0.249 0.202 0.208    NA 0.471
+## [12,] 0.166 0.166 0.290 0.280 0.287 0.315 0.362 0.271 0.222 0.227 0.529    NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z\_scores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 137 x 10
+##    team              fpi    sp   elo   srs  z_fpi   z_sp  z_elo  z_srs composite
+##    <chr>           <dbl> <dbl> <dbl> <dbl>  <dbl>  <dbl>  <dbl>  <dbl>     <dbl>
+##  1 Notre Dame      21.1   21.4  2153  22.4  1.77   1.60   2.49   1.88      1.94 
+##  2 Oklahoma State -14.4  -17.5  1049 -14.1 -1.19  -1.41  -1.72  -1.16     -1.37 
+##  3 Kansas State     8.18   8    1705   7.3  0.691  0.564  0.783  0.623     0.665
+##  4 Baylor           6.26   5.5  1621   3    0.530  0.370  0.462  0.264     0.407
+##  5 Iowa State       8.00   9    1589   9.1  0.676  0.642  0.340  0.773     0.608
+##  6 Texas Tech      18.3   24.3  1903  22.6  1.53   1.83   1.54   1.90      1.70 
+##  7 Kansas           5.35   5.8  1556   3.7  0.454  0.394  0.215  0.322     0.346
+##  8 TCU              9.83  10.5  1700   8.5  0.828  0.758  0.764  0.723     0.768
+##  9 West Virginia   -2.53  -6.4  1340  -2.1 -0.203 -0.553 -0.609 -0.161    -0.382
+## 10 South Florida    9.11   9.9  1736  13.9  0.768  0.712  0.901  1.17      0.888
+## # i 127 more rows
+\end{verbatim}
+
+\subsection{Bracket:}\label{bracket}
+
+Round 1 hosts are seeds 5--8 vs 12--9. Then 1 vs 8/9 winner, 4 vs 5/12,
+2 vs 7/10, 3 vs 6/11, followed by semifinals and championship. We run
+500 Monte Carlo simulations, using our probability matrix for each
+matchup and tally wins by round.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design }\OtherTok{\textless{}{-}} 
+  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{home\_team =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{), }\AttributeTok{away\_team =} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{9}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[home\_team, away\_team]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+
+\NormalTok{n\_sims }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{simulated\_wins\_r1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_wins\_r2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_wins\_r3 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_champs }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(r }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_sims)\{}
+  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{478}\SpecialCharTok{+}\NormalTok{r)}
+\NormalTok{  outcomes }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round1 }\OtherTok{\textless{}{-}}
+\NormalTok{    design }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(home\_team, away\_team) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, home\_team, away\_team),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r1[r,] }\OtherTok{=}\NormalTok{ round1 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  winner\_512 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{5}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{  winner\_611 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{6}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{11}\NormalTok{)}
+\NormalTok{  winner\_710 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{7}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{  winner\_89 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{8}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+  
+\NormalTok{  design2 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{high\_seed =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\AttributeTok{low\_seed =} \FunctionTok{c}\NormalTok{(winner\_89, winner\_710, winner\_611, winner\_512)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[high\_seed, low\_seed]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design2}
+  
+\NormalTok{  outcomes2 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design2}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round2 }\OtherTok{\textless{}{-}}
+\NormalTok{    design2 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(high\_seed, low\_seed) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes2,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, high\_seed, low\_seed),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r2[r,] }\OtherTok{=}\NormalTok{ round2 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  winner\_4512 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{4}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{4}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{5}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{5}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{12}
+\NormalTok{  \}}
+\NormalTok{  winner\_3611 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{3}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{3}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{6}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{6}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{11}
+\NormalTok{  \}}
+\NormalTok{  winner\_2710 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{2}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{7}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{7}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{10}
+\NormalTok{  \}}
+\NormalTok{  winner\_189 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{1}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{8}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{8}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{9}
+\NormalTok{  \}}
+  
+\NormalTok{  design3 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{team1 =} \FunctionTok{c}\NormalTok{(winner\_189, winner\_2710), }\AttributeTok{team2 =} \FunctionTok{c}\NormalTok{(winner\_4512, winner\_3611)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[team1, team2]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design3}
+  
+\NormalTok{  outcomes3 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design3}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round3 }\OtherTok{\textless{}{-}}
+\NormalTok{    design3 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(team1, team2) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes3,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, team1, team2),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r3[r,] }\OtherTok{=}\NormalTok{ round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  champ\_team1 }\OtherTok{=}\NormalTok{ (round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Wins }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Team[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  champ\_team2 }\OtherTok{=}\NormalTok{ (round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Wins }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Team[}\DecValTok{2}\NormalTok{]}
+  
+\NormalTok{  design4 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{team1 =} \FunctionTok{c}\NormalTok{(champ\_team1), }\AttributeTok{team2 =} \FunctionTok{c}\NormalTok{(champ\_team2)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[team1, team2]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design4}
+  
+\NormalTok{  outcomes4 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design4}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round4 }\OtherTok{\textless{}{-}}
+\NormalTok{    design4 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(team1, team2) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes4,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, team1, team2),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_champs[r,] }\OtherTok{=}\NormalTok{ round4 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Results}\label{results}
+
+We first look at what percentage chance each team has to move onto the
+next round.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{percent\_results }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \DecValTok{4}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{0}\NormalTok{))}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(teams)) \{}
+\NormalTok{  team }\OtherTok{=}\NormalTok{ teams[i]}
+\NormalTok{  wins1 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r1[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent1 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(i }\SpecialCharTok{\textless{}} \DecValTok{5}\NormalTok{, }\DecValTok{100}\NormalTok{, }\FunctionTok{round}\NormalTok{(wins1}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{)}
+\NormalTok{  wins2 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r2[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent2 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins2}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{  wins3 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r3[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent3 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins3}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{  wins4 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_champs[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent4 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins4}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+  
+\NormalTok{  percent\_results[[team]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(percent1, percent2, percent3, percent4)}
+\NormalTok{\}}
+
+\FunctionTok{rownames}\NormalTok{(percent\_results) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Round 1"}\NormalTok{, }\StringTok{"Quarterfinal"}\NormalTok{, }\StringTok{"Semifinal"}\NormalTok{, }\StringTok{"Championship"}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(percent\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Ohio State Indiana Texas A&M Alabama Georgia Ole Miss  BYU
+## Round 1           100.0   100.0     100.0   100.0    72.8     71.4 36.6
+## Quarterfinal       62.8    64.8      57.6    55.4    35.8     34.4  9.4
+## Semifinal          43.2    44.2      22.2    22.2    12.8     12.2  3.6
+## Championship       26.8    24.2      10.8    11.2     6.8      2.0  1.0
+##              Texas Tech Oregon Notre Dame Virginia Memphis
+## Round 1            43.2   56.8       63.4     28.6    27.2
+## Quarterfinal       13.0   24.2       25.8      8.0     8.8
+## Semifinal           6.6   13.4       17.0      0.8     1.8
+## Championship        3.6    7.4        5.6      0.4     0.2
+\end{verbatim}
+
+We then create plots for each round showing the percent chance of
+advancing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{team\_colors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Alabama"}    \OtherTok{=} \StringTok{"\#9e1b32"}\NormalTok{,}
+  \StringTok{"Indiana"}    \OtherTok{=} \StringTok{"\#990000"}\NormalTok{,}
+  \StringTok{"Ohio State"} \OtherTok{=} \StringTok{"\#BB0000"}\NormalTok{,}
+  \StringTok{"Texas A\&M"}  \OtherTok{=} \StringTok{"\#500000"}\NormalTok{,}
+  \StringTok{"Georgia"}    \OtherTok{=} \StringTok{"\#BA0C2F"}\NormalTok{,}
+  \StringTok{"Ole Miss"}   \OtherTok{=} \StringTok{"\#006BA6"}\NormalTok{,}
+  \StringTok{"Notre Dame"} \OtherTok{=} \StringTok{"\#c99700"}\NormalTok{,}
+  \StringTok{"Oregon"}     \OtherTok{=} \StringTok{"\#007030"}\NormalTok{,}
+  \StringTok{"Texas Tech"} \OtherTok{=} \StringTok{"\#CC0000"}\NormalTok{,}
+  \StringTok{"BYU"}        \OtherTok{=} \StringTok{"\#0062B8"}\NormalTok{,}
+  \StringTok{"Virginia"}   \OtherTok{=} \StringTok{"\#F84C1E"}\NormalTok{,}
+  \StringTok{"Memphis"}    \OtherTok{=} \StringTok{"\#003087"}
+\NormalTok{)}
+
+\NormalTok{plot\_df }\OtherTok{\textless{}{-}}\NormalTok{ percent\_results }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  tibble}\SpecialCharTok{::}\FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"Round"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Round, }\AttributeTok{names\_to =} \StringTok{"Team"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Percent"}\NormalTok{)}
+
+\NormalTok{plot\_r1 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Round 1"}\NormalTok{)}
+\NormalTok{plot\_r2 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Quarterfinal"}\NormalTok{)}
+\NormalTok{plot\_r3 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Semifinal"}\NormalTok{)}
+\NormalTok{plot\_r4 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Championship"}\NormalTok{)}
+
+\NormalTok{round1plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Round 1 Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round2plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Quarterfinal Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round3plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Semifinal Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round4plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Championship Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round1\_plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round1plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round2\_plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round2plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round3\_plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round3plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round4\_plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round4plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+
+\NormalTok{round1plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-5-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round2plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-5-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round3plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-5-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round4plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-5-4.pdf}}
+
+The results are about as expected. Ohio State, Indiana, Alabama, and
+Texas A\&M all have 100\% chance to advance in the first round because
+they all have byes. We see that Ohio State and Indiana are clearly
+favored far above everyone else, with Indiana having a better chance to
+advance to the championship, but Ohio State has the slight edge on them
+to win that game. An interesting note is that Oregon (\#9 seed) has the
+5th best odds to win the national championship. Below we see what the
+bracket would look like based off of our model's predictions.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 1: 2025 Predictions --- Bracket Visualization}]{}}
+\caption{Figure 1: 2025 Predictions --- Bracket Visualization}
+\end{figure}
+
+\subsection{2024 Back-Test}\label{back-test}
+
+We run the same exact code on the 2024 college football playoffs so we
+can compare how our model performed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{teams }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Oregon"}\NormalTok{, }\StringTok{"Georgia"}\NormalTok{, }\StringTok{"Boise State"}\NormalTok{, }\StringTok{"Arizona State"}\NormalTok{, }\StringTok{"Texas"}\NormalTok{, }\StringTok{"Penn State"}\NormalTok{, }\StringTok{"Notre Dame"}\NormalTok{, }\StringTok{"Ohio State"}\NormalTok{, }\StringTok{"Tennessee"}\NormalTok{, }\StringTok{"Indiana"}\NormalTok{, }\StringTok{"SMU"}\NormalTok{, }\StringTok{"Clemson"}\NormalTok{)}
+
+
+\NormalTok{fpi }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_fpi}\NormalTok{(}\AttributeTok{year =} \DecValTok{2024}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, fpi)}
+\NormalTok{sp  }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_sp}\NormalTok{(}\AttributeTok{year =} \DecValTok{2024}\NormalTok{)  }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, }\AttributeTok{sp =}\NormalTok{ rating) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(team }\SpecialCharTok{!=} \StringTok{"nationalAverages"}\NormalTok{)}
+\NormalTok{elo }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_elo}\NormalTok{(}\AttributeTok{year =} \DecValTok{2024}\NormalTok{, }\AttributeTok{season\_type =} \StringTok{"regular"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, elo)}
+\NormalTok{srs }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_srs}\NormalTok{(}\AttributeTok{year =} \DecValTok{2024}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, }\AttributeTok{srs =}\NormalTok{ rating)}
+
+\NormalTok{z\_scores }\OtherTok{\textless{}{-}}\NormalTok{ fpi }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(sp,  }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(elo, }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(srs, }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ tidyr}\SpecialCharTok{::}\FunctionTok{drop\_na}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{z\_fpi =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(fpi)),}
+    \AttributeTok{z\_sp  =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(sp)),}
+    \AttributeTok{z\_elo =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(elo)),}
+    \AttributeTok{z\_srs =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(srs)),}
+    \AttributeTok{composite =}\NormalTok{ (z\_fpi }\SpecialCharTok{+}\NormalTok{ z\_sp }\SpecialCharTok{+}\NormalTok{ z\_elo }\SpecialCharTok{+}\NormalTok{ z\_srs)}\SpecialCharTok{/}\DecValTok{4}
+\NormalTok{  )}
+
+\NormalTok{ratings\_com }\OtherTok{=} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in}\NormalTok{ teams) \{}
+\NormalTok{  rating }\OtherTok{=}\NormalTok{ (z\_scores }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(team }\SpecialCharTok{==}\NormalTok{ t))}\SpecialCharTok{$}\NormalTok{composite[}\DecValTok{1}\NormalTok{]}
+  \FunctionTok{cat}\NormalTok{(t, }\StringTok{": "}\NormalTok{, rating, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\NormalTok{  ratings\_com }\OtherTok{=} \FunctionTok{c}\NormalTok{(ratings\_com, rating)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Oregon: 1.865358
+## Georgia: 1.783524
+## Boise State: 0.8969355
+## Arizona State: 0.998138
+## Texas: 1.970282
+## Penn State: 1.79114
+## Notre Dame: 2.102223
+## Ohio State: 2.235929
+## Tennessee: 1.614369
+## Indiana: 1.600961
+## SMU: 1.393184
+## Clemson: 1.125629
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probs\_com }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1} \SpecialCharTok{*} \FunctionTok{outer}\NormalTok{(}\AttributeTok{X =}\NormalTok{ ratings\_com, }\AttributeTok{Y =}\NormalTok{ ratings\_com, }\AttributeTok{FUN =} \StringTok{"{-}"}\NormalTok{)))}
+\FunctionTok{diag}\NormalTok{(probs\_com) }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\FunctionTok{round}\NormalTok{(probs\_com, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12]
+##  [1,]    NA 0.520 0.725 0.704 0.474 0.519 0.441 0.408 0.562 0.566 0.616 0.677
+##  [2,] 0.480    NA 0.708 0.687 0.453 0.498 0.421 0.389 0.542 0.546 0.596 0.659
+##  [3,] 0.275 0.292    NA 0.475 0.255 0.290 0.231 0.208 0.328 0.331 0.378 0.443
+##  [4,] 0.296 0.313 0.525    NA 0.274 0.312 0.249 0.225 0.351 0.354 0.403 0.468
+##  [5,] 0.526 0.547 0.745 0.726    NA 0.545 0.467 0.434 0.588 0.591 0.640 0.699
+##  [6,] 0.481 0.502 0.710 0.688 0.455    NA 0.423 0.391 0.544 0.547 0.598 0.660
+##  [7,] 0.559 0.579 0.769 0.751 0.533 0.577    NA 0.467 0.620 0.623 0.670 0.726
+##  [8,] 0.592 0.611 0.792 0.775 0.566 0.609 0.533    NA 0.651 0.654 0.699 0.752
+##  [9,] 0.438 0.458 0.672 0.649 0.412 0.456 0.380 0.349    NA 0.503 0.555 0.620
+## [10,] 0.434 0.454 0.669 0.646 0.409 0.453 0.377 0.346 0.497    NA 0.552 0.617
+## [11,] 0.384 0.404 0.622 0.597 0.360 0.402 0.330 0.301 0.445 0.448    NA 0.566
+## [12,] 0.323 0.341 0.557 0.532 0.301 0.340 0.274 0.248 0.380 0.383 0.434    NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design }\OtherTok{\textless{}{-}} 
+  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{home\_team =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{), }\AttributeTok{away\_team =} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{9}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[home\_team, away\_team]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+
+\NormalTok{n\_sims }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{simulated\_wins\_r1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_wins\_r2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_wins\_r3 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_champs }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(r }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_sims)\{}
+  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{478}\SpecialCharTok{+}\NormalTok{r)}
+\NormalTok{  outcomes }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round1 }\OtherTok{\textless{}{-}}
+\NormalTok{    design }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(home\_team, away\_team) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, home\_team, away\_team),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r1[r,] }\OtherTok{=}\NormalTok{ round1 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  winner\_512 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{5}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{  winner\_611 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{6}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{11}\NormalTok{)}
+\NormalTok{  winner\_710 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{7}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{  winner\_89 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{8}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+  
+\NormalTok{  design2 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{high\_seed =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\AttributeTok{low\_seed =} \FunctionTok{c}\NormalTok{(winner\_89, winner\_710, winner\_611, winner\_512)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[high\_seed, low\_seed]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design2}
+  
+\NormalTok{  outcomes2 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design2}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round2 }\OtherTok{\textless{}{-}}
+\NormalTok{    design2 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(high\_seed, low\_seed) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes2,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, high\_seed, low\_seed),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r2[r,] }\OtherTok{=}\NormalTok{ round2 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  winner\_4512 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{4}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{4}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{5}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{5}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{12}
+\NormalTok{  \}}
+\NormalTok{  winner\_3611 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{3}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{3}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{6}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{6}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{11}
+\NormalTok{  \}}
+\NormalTok{  winner\_2710 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{2}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{7}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{7}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{10}
+\NormalTok{  \}}
+\NormalTok{  winner\_189 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{1}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{8}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{8}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{9}
+\NormalTok{  \}}
+  
+\NormalTok{  design3 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{team1 =} \FunctionTok{c}\NormalTok{(winner\_189, winner\_2710), }\AttributeTok{team2 =} \FunctionTok{c}\NormalTok{(winner\_4512, winner\_3611)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[team1, team2]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design3}
+  
+\NormalTok{  outcomes3 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design3}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round3 }\OtherTok{\textless{}{-}}
+\NormalTok{    design3 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(team1, team2) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes3,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, team1, team2),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r3[r,] }\OtherTok{=}\NormalTok{ round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  champ\_team1 }\OtherTok{=}\NormalTok{ (round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Wins }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Team[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  champ\_team2 }\OtherTok{=}\NormalTok{ (round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Wins }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Team[}\DecValTok{2}\NormalTok{]}
+  
+\NormalTok{  design4 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{team1 =} \FunctionTok{c}\NormalTok{(champ\_team1), }\AttributeTok{team2 =} \FunctionTok{c}\NormalTok{(champ\_team2)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[team1, team2]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design4}
+  
+\NormalTok{  outcomes4 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design4}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round4 }\OtherTok{\textless{}{-}}
+\NormalTok{    design4 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(team1, team2) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes4,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, team1, team2),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_champs[r,] }\OtherTok{=}\NormalTok{ round4 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+\NormalTok{\}}
+
+\NormalTok{percent\_results }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \DecValTok{4}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{0}\NormalTok{))}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(teams)) \{}
+\NormalTok{  team }\OtherTok{=}\NormalTok{ teams[i]}
+\NormalTok{  wins1 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r1[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent1 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(i }\SpecialCharTok{\textless{}} \DecValTok{5}\NormalTok{, }\DecValTok{100}\NormalTok{, }\FunctionTok{round}\NormalTok{(wins1}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{)}
+\NormalTok{  wins2 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r2[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent2 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins2}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{  wins3 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r3[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent3 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins3}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{  wins4 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_champs[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent4 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins4}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+  
+\NormalTok{  percent\_results[[team]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(percent1, percent2, percent3, percent4)}
+\NormalTok{\}}
+
+\FunctionTok{rownames}\NormalTok{(percent\_results) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Round 1"}\NormalTok{, }\StringTok{"Quarterfinal"}\NormalTok{, }\StringTok{"Semifinal"}\NormalTok{, }\StringTok{"Championship"}\NormalTok{)}
+
+\NormalTok{team\_colors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Oregon"} \OtherTok{=} \StringTok{"\#007030"}\NormalTok{,}
+  \StringTok{"Georgia"} \OtherTok{=} \StringTok{"\#BA0C2F"}\NormalTok{,}
+  \StringTok{"Boise State"} \OtherTok{=} \StringTok{"\#0033A0"}\NormalTok{,}
+  \StringTok{"Arizona State"} \OtherTok{=} \StringTok{"\#8C1D40"}\NormalTok{,}
+  \StringTok{"Texas"} \OtherTok{=} \StringTok{"\#bf5700"}\NormalTok{,}
+  \StringTok{"Penn State"} \OtherTok{=} \StringTok{"\#041E42"}\NormalTok{,}
+  \StringTok{"Notre Dame"} \OtherTok{=} \StringTok{"\#c99700"}\NormalTok{,}
+  \StringTok{"Ohio State"} \OtherTok{=} \StringTok{"\#BB0000"}\NormalTok{,}
+  \StringTok{"Tennessee"} \OtherTok{=} \StringTok{"\#FF8200"}\NormalTok{,}
+  \StringTok{"Indiana"} \OtherTok{=} \StringTok{"\#990000"}\NormalTok{,}
+  \StringTok{"SMU"} \OtherTok{=} \StringTok{"\#0033A0"}\NormalTok{,}
+  \StringTok{"Clemson"} \OtherTok{=} \StringTok{"\#F56600"}
+\NormalTok{)}
+
+\NormalTok{plot\_df }\OtherTok{\textless{}{-}}\NormalTok{ percent\_results }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  tibble}\SpecialCharTok{::}\FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"Round"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Round, }\AttributeTok{names\_to =} \StringTok{"Team"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Percent"}\NormalTok{)}
+
+\NormalTok{plot\_r1 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Round 1"}\NormalTok{)}
+\NormalTok{plot\_r2 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Quarterfinal"}\NormalTok{)}
+\NormalTok{plot\_r3 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Semifinal"}\NormalTok{)}
+\NormalTok{plot\_r4 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Championship"}\NormalTok{)}
+
+\NormalTok{plots }\OtherTok{=} \FunctionTok{c}\NormalTok{(plot\_r1, plot\_r2, plot\_r3, plot\_r4)}
+
+\NormalTok{round1plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Round 1 Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round2plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Quarterfinal Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round3plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Semifinal Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round4plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Championship Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round1\_2024.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round1plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round2\_2024.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round2plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round3\_2024.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round3plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round4\_2024.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round4plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We look at the percentages to advance again:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(percent\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Oregon Georgia Boise State Arizona State Texas Penn State
+## Round 1       100.0   100.0       100.0         100.0  70.6       61.4
+## Quarterfinal   46.4    47.8        33.4          33.2  52.4       42.8
+## Semifinal      28.4    28.6        10.2           7.6  24.6       20.6
+## Championship   15.6    11.6         1.8           3.2  13.4       10.6
+##              Notre Dame Ohio State Tennessee Indiana  SMU Clemson
+## Round 1            60.8       65.4      34.6    39.2 38.6    29.4
+## Quarterfinal       34.4       39.8      13.8    17.8 23.8    14.4
+## Semifinal          21.0       26.0       8.2    10.0  9.6     5.2
+## Championship       11.6       17.6       4.2     4.4  4.8     1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round1plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-7-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round2plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-7-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round3plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-7-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round4plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-7-4.pdf}}
+
+From this we can see that our model performed fairly well on the 2024
+playoffs. It got the entire first round correct, as well as predicting
+Ohio State (\#8 seed) to win the national championship which they did.
+Below again we see how our model did compared to what actually happened
+in the playoffs:
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 2: 2024 Predictions --- Model vs Actual Bracket}]{"predict2024.png}}
+\caption{Figure 2: 2024 Predictions --- Model vs Actual Bracket}
+\end{figure}
+
+\subsection{Toilet Bowl}\label{toilet-bowl}
+
+Finally we did the same thing with the worst 12 teams in college
+football this year for fun.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fpi }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_fpi}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, fpi)}
+\NormalTok{sp  }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_sp}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{)  }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, }\AttributeTok{sp =}\NormalTok{ rating) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(team }\SpecialCharTok{!=} \StringTok{"nationalAverages"}\NormalTok{)}
+\NormalTok{elo }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_elo}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, elo)}
+\NormalTok{srs }\OtherTok{\textless{}{-}} \FunctionTok{cfbd\_ratings\_srs}\NormalTok{(}\AttributeTok{year =} \DecValTok{2025}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{transmute}\NormalTok{(team, }\AttributeTok{srs =}\NormalTok{ rating)}
+
+\NormalTok{z\_scores }\OtherTok{\textless{}{-}}\NormalTok{ fpi }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(sp,  }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(elo, }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{full\_join}\NormalTok{(srs, }\AttributeTok{by =} \StringTok{"team"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ tidyr}\SpecialCharTok{::}\FunctionTok{drop\_na}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{z\_fpi =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(fpi)),}
+    \AttributeTok{z\_sp  =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(sp)),}
+    \AttributeTok{z\_elo =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(elo)),}
+    \AttributeTok{z\_srs =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{scale}\NormalTok{(srs)),}
+    \AttributeTok{composite =}\NormalTok{ (z\_fpi }\SpecialCharTok{+}\NormalTok{ z\_sp }\SpecialCharTok{+}\NormalTok{ z\_elo }\SpecialCharTok{+}\NormalTok{ z\_srs)}\SpecialCharTok{/}\DecValTok{4}
+\NormalTok{  )}
+
+\NormalTok{teams2 }\OtherTok{=}\NormalTok{ (z\_scores }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(team, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(composite) }\SpecialCharTok{|\textgreater{}} \FunctionTok{head}\NormalTok{(}\AttributeTok{n=}\DecValTok{12}\NormalTok{))}\SpecialCharTok{$}\NormalTok{team}
+
+\NormalTok{ratings\_com }\OtherTok{=} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in}\NormalTok{ teams2) \{}
+\NormalTok{  rating }\OtherTok{=}\NormalTok{ (z\_scores }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(team }\SpecialCharTok{==}\NormalTok{ t))}\SpecialCharTok{$}\NormalTok{composite[}\DecValTok{1}\NormalTok{]}
+  \FunctionTok{cat}\NormalTok{(t, }\StringTok{": "}\NormalTok{, rating, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\NormalTok{  ratings\_com }\OtherTok{=} \FunctionTok{c}\NormalTok{(ratings\_com, rating)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Massachusetts: -2.407886
+## Sam Houston: -1.966597
+## Charlotte: -1.84027
+## Kent State: -1.717262
+## UL Monroe: -1.671364
+## Georgia State: -1.592223
+## Ball State: -1.586089
+## Middle Tennessee: -1.45995
+## Akron: -1.398296
+## Oklahoma State: -1.371857
+## Eastern Michigan: -1.331184
+## Nevada: -1.293601
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{probs\_com }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1} \SpecialCharTok{*} \FunctionTok{outer}\NormalTok{(}\AttributeTok{X =}\NormalTok{ ratings\_com, }\AttributeTok{Y =}\NormalTok{ ratings\_com, }\AttributeTok{FUN =} \StringTok{"{-}"}\NormalTok{)))}
+\FunctionTok{diag}\NormalTok{(probs\_com) }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\FunctionTok{round}\NormalTok{(probs\_com, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12]
+##  [1,]    NA 0.391 0.362 0.334 0.324 0.307 0.305 0.279 0.267 0.262 0.254 0.247
+##  [2,] 0.609    NA 0.468 0.438 0.427 0.407 0.406 0.376 0.362 0.356 0.346 0.338
+##  [3,] 0.638 0.532    NA 0.469 0.458 0.438 0.437 0.406 0.391 0.385 0.375 0.367
+##  [4,] 0.666 0.562 0.531    NA 0.489 0.469 0.467 0.436 0.421 0.414 0.405 0.396
+##  [5,] 0.676 0.573 0.542 0.511    NA 0.480 0.479 0.447 0.432 0.426 0.416 0.407
+##  [6,] 0.693 0.593 0.562 0.531 0.520    NA 0.498 0.467 0.452 0.445 0.435 0.426
+##  [7,] 0.695 0.594 0.563 0.533 0.521 0.502    NA 0.469 0.453 0.447 0.437 0.427
+##  [8,] 0.721 0.624 0.594 0.564 0.553 0.533 0.531    NA 0.485 0.478 0.468 0.459
+##  [9,] 0.733 0.638 0.609 0.579 0.568 0.548 0.547 0.515    NA 0.493 0.483 0.474
+## [10,] 0.738 0.644 0.615 0.586 0.574 0.555 0.553 0.522 0.507    NA 0.490 0.480
+## [11,] 0.746 0.654 0.625 0.595 0.584 0.565 0.563 0.532 0.517 0.510    NA 0.491
+## [12,] 0.753 0.662 0.633 0.604 0.593 0.574 0.573 0.541 0.526 0.520 0.509    NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{design }\OtherTok{\textless{}{-}} 
+  \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{home\_team =} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{), }\AttributeTok{away\_team =} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{9}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[home\_team, away\_team]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+
+\NormalTok{n\_sims }\OtherTok{\textless{}{-}} \DecValTok{500}
+\NormalTok{simulated\_wins\_r1 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_wins\_r2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_wins\_r3 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\NormalTok{simulated\_champs }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\AttributeTok{data =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =}\NormalTok{ n\_sims, }\AttributeTok{ncol =} \DecValTok{12}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(r }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_sims)\{}
+  \FunctionTok{set.seed}\NormalTok{(}\DecValTok{478}\SpecialCharTok{+}\NormalTok{r)}
+\NormalTok{  outcomes }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round1 }\OtherTok{\textless{}{-}}
+\NormalTok{    design }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(home\_team, away\_team) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, home\_team, away\_team),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r1[r,] }\OtherTok{=}\NormalTok{ round1 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  winner\_512 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{5}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{12}\NormalTok{)}
+\NormalTok{  winner\_611 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{6}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{11}\NormalTok{)}
+\NormalTok{  winner\_710 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{7}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{10}\NormalTok{)}
+\NormalTok{  winner\_89 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(round1}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{8}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+  
+\NormalTok{  design2 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{high\_seed =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{), }\AttributeTok{low\_seed =} \FunctionTok{c}\NormalTok{(winner\_89, winner\_710, winner\_611, winner\_512)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[high\_seed, low\_seed]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design2}
+  
+\NormalTok{  outcomes2 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{4}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design2}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round2 }\OtherTok{\textless{}{-}}
+\NormalTok{    design2 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(high\_seed, low\_seed) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes2,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, high\_seed, low\_seed),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r2[r,] }\OtherTok{=}\NormalTok{ round2 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  winner\_4512 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{4}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{4}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{5}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{5}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{12}
+\NormalTok{  \}}
+\NormalTok{  winner\_3611 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{3}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{3}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{6}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{6}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{11}
+\NormalTok{  \}}
+\NormalTok{  winner\_2710 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{2}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{7}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{7}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{10}
+\NormalTok{  \}}
+\NormalTok{  winner\_189 }\OtherTok{=} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{1}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (round2}\SpecialCharTok{$}\NormalTok{Wins[}\DecValTok{8}\NormalTok{] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+    \DecValTok{8}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \DecValTok{9}
+\NormalTok{  \}}
+  
+\NormalTok{  design3 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{team1 =} \FunctionTok{c}\NormalTok{(winner\_189, winner\_2710), }\AttributeTok{team2 =} \FunctionTok{c}\NormalTok{(winner\_4512, winner\_3611)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[team1, team2]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design3}
+  
+\NormalTok{  outcomes3 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{2}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design3}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round3 }\OtherTok{\textless{}{-}}
+\NormalTok{    design3 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(team1, team2) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes3,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, team1, team2),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_wins\_r3[r,] }\OtherTok{=}\NormalTok{ round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+  
+\NormalTok{  champ\_team1 }\OtherTok{=}\NormalTok{ (round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Wins }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Team[}\DecValTok{1}\NormalTok{]}
+\NormalTok{  champ\_team2 }\OtherTok{=}\NormalTok{ (round3 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Wins }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{))}\SpecialCharTok{$}\NormalTok{Team[}\DecValTok{2}\NormalTok{]}
+  
+\NormalTok{  design4 }\OtherTok{\textless{}{-}} 
+    \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{team1 =} \FunctionTok{c}\NormalTok{(champ\_team1), }\AttributeTok{team2 =} \FunctionTok{c}\NormalTok{(champ\_team2)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{prob =}\NormalTok{ probs\_com[team1, team2]) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{  design4}
+  
+\NormalTok{  outcomes4 }\OtherTok{\textless{}{-}} \FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n =} \DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{, }\AttributeTok{prob =}\NormalTok{ design4}\SpecialCharTok{$}\NormalTok{prob)}
+\NormalTok{  round4 }\OtherTok{\textless{}{-}}
+\NormalTok{    design4 }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(team1, team2) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{outcome =}\NormalTok{ outcomes4,}
+      \AttributeTok{winner =} \FunctionTok{ifelse}\NormalTok{(outcome }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, team1, team2),}
+      \AttributeTok{winner =} \FunctionTok{factor}\NormalTok{(winner, }\AttributeTok{levels =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Wins =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{Team =}\NormalTok{ winner) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{complete}\NormalTok{(Team, }\AttributeTok{fill =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Wins =} \DecValTok{0}\NormalTok{))}
+  
+\NormalTok{  simulated\_champs[r,] }\OtherTok{=}\NormalTok{ round4 }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{pull}\NormalTok{(Wins)}
+\NormalTok{\}}
+
+\NormalTok{percent\_results }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\AttributeTok{nrow =} \DecValTok{4}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{0}\NormalTok{))}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(teams)) \{}
+\NormalTok{  team }\OtherTok{=}\NormalTok{ teams2[i]}
+\NormalTok{  wins1 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r1[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent1 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(i }\SpecialCharTok{\textless{}} \DecValTok{5}\NormalTok{, }\DecValTok{100}\NormalTok{, }\FunctionTok{round}\NormalTok{(wins1}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{)}
+\NormalTok{  wins2 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r2[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent2 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins2}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{  wins3 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_wins\_r3[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent3 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins3}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{  wins4 }\OtherTok{=} \FunctionTok{table}\NormalTok{(simulated\_champs[,i])[}\DecValTok{2}\NormalTok{]}
+\NormalTok{  percent4 }\OtherTok{=} \FunctionTok{round}\NormalTok{(wins4}\SpecialCharTok{/}\NormalTok{n\_sims, }\AttributeTok{digits =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+  
+\NormalTok{  percent\_results[[team]] }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(percent1, percent2, percent3, percent4)}
+\NormalTok{\}}
+
+\FunctionTok{rownames}\NormalTok{(percent\_results) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Round 1"}\NormalTok{, }\StringTok{"Quarterfinal"}\NormalTok{, }\StringTok{"Semifinal"}\NormalTok{, }\StringTok{"Championship"}\NormalTok{)}
+
+\NormalTok{team\_colors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Massachusetts"} \OtherTok{=} \StringTok{"\#971B2F"}\NormalTok{,}
+  \StringTok{"Sam Houston"} \OtherTok{=} \StringTok{"\#fe5100"}\NormalTok{,}
+  \StringTok{"Charlotte"} \OtherTok{=} \StringTok{"\#046A38"}\NormalTok{,}
+  \StringTok{"Kent State"} \OtherTok{=} \StringTok{"\#EAAB00"}\NormalTok{,}
+  \StringTok{"UL Monroe"} \OtherTok{=} \StringTok{"\#840029"}\NormalTok{,}
+  \StringTok{"Georgia State"} \OtherTok{=} \StringTok{"\#0039A6"}\NormalTok{,}
+  \StringTok{"Ball State"} \OtherTok{=} \StringTok{"\#BA0C2F"}\NormalTok{,}
+  \StringTok{"Middle Tennessee"} \OtherTok{=} \StringTok{"\#0066CC"}\NormalTok{,}
+  \StringTok{"Akron"} \OtherTok{=} \StringTok{"\#A89968"}\NormalTok{,}
+  \StringTok{"Oklahoma State"} \OtherTok{=} \StringTok{"\#FF7300"}\NormalTok{,}
+  \StringTok{"Eastern Michigan"} \OtherTok{=} \StringTok{"\#006633"}\NormalTok{,}
+  \StringTok{"Nevada"} \OtherTok{=} \StringTok{"\#003366"}
+\NormalTok{)}
+
+\NormalTok{plot\_df }\OtherTok{\textless{}{-}}\NormalTok{ percent\_results }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  tibble}\SpecialCharTok{::}\FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"Round"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Round, }\AttributeTok{names\_to =} \StringTok{"Team"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"Percent"}\NormalTok{)}
+
+\NormalTok{plot\_r1 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Round 1"}\NormalTok{)}
+\NormalTok{plot\_r2 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Quarterfinal"}\NormalTok{)}
+\NormalTok{plot\_r3 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Semifinal"}\NormalTok{)}
+\NormalTok{plot\_r4 }\OtherTok{\textless{}{-}}\NormalTok{ plot\_df }\SpecialCharTok{|\textgreater{}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Round }\SpecialCharTok{==} \StringTok{"Championship"}\NormalTok{)}
+
+\NormalTok{plots }\OtherTok{=} \FunctionTok{c}\NormalTok{(plot\_r1, plot\_r2, plot\_r3, plot\_r4)}
+
+\NormalTok{round1plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Round 1 Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round2plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Quarterfinal Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round3plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r3, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Semifinal Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{round4plot }\OtherTok{=}\NormalTok{ ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(plot\_r4, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Team, }\SpecialCharTok{{-}}\NormalTok{Percent), }\AttributeTok{y =}\NormalTok{ Percent, }\AttributeTok{fill =}\NormalTok{ Team)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.1f\%\%"}\NormalTok{, Percent)),}
+            \AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.4}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Championship Win Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Team"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Win Probability (\%)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ team\_colors) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{,}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round1\_plotbowl.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round1plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round2\_plotbowl.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round2plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round3\_plotbowl.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round3plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"round4\_plotbowl.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ round4plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(percent\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Massachusetts Sam Houston Charlotte Kent State UL Monroe
+## Round 1              100.0       100.0     100.0      100.0      40.4
+## Quarterfinal          26.6        37.8      42.8       44.8      18.4
+## Semifinal              9.6        15.0      20.2       20.8       9.6
+## Championship           3.6         5.6       7.2       11.8       4.6
+##              Georgia State Ball State Middle Tennessee Akron Oklahoma State
+## Round 1               42.4       45.2             48.4  51.6           54.8
+## Quarterfinal          22.2       28.0             36.4  37.0           34.2
+## Semifinal             11.6       14.6             20.2  20.0           18.0
+## Championship           6.6        5.8              9.8  12.2           10.4
+##              Eastern Michigan Nevada
+## Round 1                  57.6   59.6
+## Quarterfinal             35.0   36.8
+## Semifinal                20.6   19.8
+## Championship              9.6   12.8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round1plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-9-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round2plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-9-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round3plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-9-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{round4plot}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{FinalReport_files/figure-latex/unnamed-chunk-9-4.pdf}}
+
+\subsection{Conclusion}\label{conclusion}
+
+Overall, the simulation behaved about as expected. In 2025, Ohio State
+and Indiana emerged as clear leaders across advancement stages, while
+lower seeds like Oregon and Notre Dame gained meaningful probability
+mass as paths opened up. It makes sense with a 12-team
+single-elimination bracket where mid-tier teams can string wins
+together. The 2024 back-test was decent, but the model overvalued
+Georgia relative to how the bracket actually unfolded (see Figure 2),
+highlighting how random the CFP can be. Taken together, the results show
+that top seeds benefit both from underlying strength and bracket
+structure, while select lower seeds can still move the needle with
+favorable matchups.
+
+\end{document}
